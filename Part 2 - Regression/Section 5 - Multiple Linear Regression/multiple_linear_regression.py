@@ -40,6 +40,21 @@ regressor.fit(X_train, y_train)
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
 
+#error stadistico
 from sklearn.metrics import mean_squared_error
 stError = mean_squared_error(y_test,y_pred)**(1/2)
-print  (stError)
+print  ("Standard error: ",stError)
+
+"""
+----------Backward Elimination--------
+"""
+
+#importar modelos estadisticos
+import statsmodels.formula.api as sm
+#appendear X_0
+X = np.append(arr =np.ones((len(X), 1)).astype(int), values = X, axis = 1)
+#backward elimination
+SL = 0.05
+X_opt = X[:, [0,1,2,3,4,5]] #todas las columnas
+
+regressor_OLS = sm.OLS(y, X) #OLS requiere especificar X_0
