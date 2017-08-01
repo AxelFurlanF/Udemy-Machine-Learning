@@ -39,3 +39,7 @@ regressor.fit(X_train, y_train)
 
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
+
+from sklearn.metrics import mean_squared_error
+stError = mean_squared_error(y_test,y_pred)**(1/2)
+print  (stError)
