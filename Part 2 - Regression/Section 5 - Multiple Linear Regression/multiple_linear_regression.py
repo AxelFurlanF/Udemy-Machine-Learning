@@ -54,7 +54,14 @@ import statsmodels.formula.api as sm
 #appendear X_0
 X = np.append(arr =np.ones((len(X), 1)).astype(int), values = X, axis = 1)
 #backward elimination
-SL = 0.05
+SL = 0.05 #nivel de significancia
 X_opt = X[:, [0,1,2,3,4,5]] #todas las columnas
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit() #OLS requiere especificar X_0
+regressor_OLS.summary() #me da información estadística de las V.A
+X_opt = X[:, [0,3]] #columnas con p-valor menor a SL
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit() #OLS requiere especificar X_0
+regressor_OLS.summary() #me da información estadística de las V.A
 
-regressor_OLS = sm.OLS(y, X) #OLS requiere especificar X_0
+
+"""no estoy seguro que esta sea la mejor técnica para feature selection,
+ graficando la recta con esa sola feature, no da un buen modelo predictivo"""
